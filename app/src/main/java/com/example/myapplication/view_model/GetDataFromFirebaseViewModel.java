@@ -23,11 +23,9 @@ public class GetDataFromFirebaseViewModel extends ViewModel {
 
     private static final String TAG = "GetDataFromFirebaseViewModel";
 
-    private DatabaseReference databaseReference;
-    FirebaseDatabase rootNode;
+    FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
 
     public GetDataFromFirebaseViewModel() {
-        rootNode = FirebaseDatabase.getInstance();
     }
 
     private MutableLiveData<List<Academician>> academicianLiveData;
@@ -42,7 +40,7 @@ public class GetDataFromFirebaseViewModel extends ViewModel {
     }
 
     private void loadAcademicians() {
-        databaseReference = rootNode.getReference("workers").child("academician");
+        DatabaseReference databaseReference = rootNode.getReference("workers").child("academician");
 
         List<Academician> academiciansArrayList = new ArrayList<>();
         ValueEventListener academiciansListener = new ValueEventListener() {

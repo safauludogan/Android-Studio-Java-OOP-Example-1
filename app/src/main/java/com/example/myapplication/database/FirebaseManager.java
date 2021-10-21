@@ -52,8 +52,7 @@ public class FirebaseManager implements IDatabase {
 
     @Override
     public LiveData<List<Academician>> getAcademicians() {
-        GetDataFromFirebaseViewModel getDataFromFirebaseViewModel = new GetDataFromFirebaseViewModel();
-        return getDataFromFirebaseViewModel.getAcademicians();
+        return new GetDataFromFirebaseViewModel().getAcademicians();
     }
 
     @Override
