@@ -14,6 +14,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void addData(View view) {
+        System.out.println("Deneme silinecek");
        /* new DatabaseManager(
                 new FirebaseManager(
                         new Academician("Nazım Uludoğan",
