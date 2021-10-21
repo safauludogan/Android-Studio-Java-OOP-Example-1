@@ -1,10 +1,10 @@
-package com.example.myapplication;
+package com.example.myapplication.database;
 
 import java.util.HashMap;
 
 public class Officer extends Worker {
-    private String department;
-    private String shift;
+    private final String department;
+    private final String shift;
 
     public Officer(String name, String phoneNumber, String e_mail,
                    String department, String shift) {

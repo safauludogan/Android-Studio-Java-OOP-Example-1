@@ -1,4 +1,8 @@
-package com.example.myapplication;
+package com.example.myapplication.database;
+
+import androidx.lifecycle.LiveData;
+
+import java.util.List;
 
 public class DatabaseManager {
     private final IDatabase database;
@@ -19,7 +23,11 @@ public class DatabaseManager {
         database.deleteData();
     }
 
-    public void getData() {
-        database.getData();
+    public LiveData<List<Academician>> getAcademicians() {
+        return database.getAcademicians();
+    }
+
+    public LiveData<List<Officer>> getOfficers() {
+        return database.getOfficers();
     }
 }

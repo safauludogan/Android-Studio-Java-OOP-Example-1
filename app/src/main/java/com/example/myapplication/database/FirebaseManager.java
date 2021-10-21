@@ -1,32 +1,35 @@
-package com.example.myapplication;
+package com.example.myapplication.database;
 
-import static com.example.myapplication.Worker.unit;
+import static com.example.myapplication.database.Worker.unit;
 
 import android.content.Context;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
+import com.example.myapplication.view_model.GetDataFromFirebaseViewModel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
-class FirebaseManager implements IDatabase {
+public class FirebaseManager implements IDatabase {
 
-    private final HashMap<Object, Object> workers;
+    private HashMap<Object, Object> workers;
     private Context context;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef;
 
     public FirebaseManager(Context context, HashMap<Object, Object> workers) {
+        this();
         this.workers = workers;
         this.context = context;
+    }
+
+    public FirebaseManager() {
         myRef = database.getReference("workers").child(unit).child(UUID.randomUUID().toString());
     }
 
@@ -35,13 +38,6 @@ class FirebaseManager implements IDatabase {
         myRef.setValue(workers)
                 .addOnCompleteListener(task -> Toast.makeText(context, "Data adding successfully.", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(context, "Data adding fails.", Toast.LENGTH_SHORT).show());
-
-        /*System.out.println(workers.get("name"));
-        System.out.println(workers.get("e_mail"));
-        System.out.println(workers.get("phoneNumber"));
-        System.out.println(workers.get("section"));
-        System.out.println(workers.get("mission"));
-        System.out.println(workers.get("lesson"));*/
     }
 
     @Override
@@ -55,7 +51,13 @@ class FirebaseManager implements IDatabase {
     }
 
     @Override
-    public void getData() {
+    public LiveData<List<Academician>> getAcademicians() {
+        GetDataFromFirebaseViewModel getDataFromFirebaseViewModel = new GetDataFromFirebaseViewModel();
+        return getDataFromFirebaseViewModel.getAcademicians();
+    }
 
+    @Override
+    public LiveData<List<Officer>> getOfficers() {
+        return null;
     }
 }

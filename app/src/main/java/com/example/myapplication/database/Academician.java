@@ -1,19 +1,23 @@
-package com.example.myapplication;
+package com.example.myapplication.database;
 
 import java.util.HashMap;
 
 public class Academician extends Worker {
-    private final String section;
-    private final String mission;
-    private final String lessons;
+    private String section;
+    private String mission;
+    private String lessons;
 
     public Academician(String name, String phoneNumber, String e_mail,
                        String section, String mission, String lessons) {
         super(name, phoneNumber, e_mail);
-        unit="academician";
+        unit = "academician";
         this.section = section;
         this.mission = mission;
         this.lessons = lessons;
+    }
+
+    public Academician(){
+
     }
 
     public String getSection() {
