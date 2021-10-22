@@ -1,8 +1,9 @@
 package com.example.myapplication.database;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Academician extends Worker {
+public class Academician extends Worker implements Serializable {
     private String section;
     private String mission;
     private String lessons;

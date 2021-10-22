@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="add">Ekle</string>
+    <string name="name">Ad Soyad</string>
+    <string name="email">E-Posta</string>
+    <string name="section">Bölüm</string>
+    <string name="mission">Görev</string>
+    <string name="lesson">Sınıf</string>
+    <string name="phoneNumber">Telefon Numarası</string>
 </resources>
