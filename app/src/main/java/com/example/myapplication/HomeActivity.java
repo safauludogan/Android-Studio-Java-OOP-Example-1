@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.myapplication.database.Academician;
-import com.example.myapplication.database.AcademicianDetailActivity;
 import com.example.myapplication.database.DatabaseManager;
 import com.example.myapplication.database.FirebaseManager;
 
@@ -35,26 +33,25 @@ public class HomeActivity extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, academicianList);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Academician academicianModel = academicianArrayList.get(position);
-                Intent intent = new Intent(HomeActivity.this, AcademicianDetailActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("academicianModel", academicianModel);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
+
+        listView.setOnItemClickListener((parent, view, position, id) -> {//When clicking on listView, we will send that clicked.
+            Intent intent = new Intent(HomeActivity.this, AcademicianDetailActivity.class);
+            intent.putExtra("academician", academicianArrayList.get(position));
+            startActivity(intent);
         });
 
         getAcademicians();
     }
 
-    private void getAcademicians() {
-
+    private void getAcademicians() {//Get just academicians name to listView
         new DatabaseManager(new FirebaseManager()).getAcademicians().observe(this, academicians -> {
-            academicianArrayList = (ArrayList<Academician>) academicians;
+
+            //Clearing the lists to avoid duplication of data.
+            academicianArrayList.clear();
+            academicianList.clear();
+
             for (int i = 0; i < academicians.size(); i++) {
+                academicianArrayList.add(academicians.get(i));//Add all academicians to list for intent(We will use this list when click on listView)
                 academicianList.add(academicians.get(i).getName());
             }
             listView.setAdapter(arrayAdapter);
@@ -65,11 +62,11 @@ public class HomeActivity extends AppCompatActivity {
 
         new DatabaseManager(
                 new FirebaseManager(getBaseContext(),
-                        new Academician("Merve ekşi",
-                                "05565737404",
-                                "merveksi@hotmail.com",
-                                "Fizik",
-                                "Kuantum Fiziği",
+                        new Academician("Safa Uludoğan",
+                                "05520018569",
+                                "suludogan1@gmail.com",
+                                "Bilişim",
+                                "Mobile Developer",
                                 "4")
                                 .getWorker()))
                 .addData();

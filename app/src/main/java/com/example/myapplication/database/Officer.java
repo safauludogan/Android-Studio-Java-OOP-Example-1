@@ -26,10 +26,11 @@ public class Officer extends Worker {
 
     public HashMap<Object, Object> getWorker() {
         workers.put("name", getName());
-        workers.put("e_mail", getEmail());
+        workers.put("mailAdress", getMailAdress());
         workers.put("phoneNumber", getPhoneNumber());
         workers.put("department", getDepartment());
         workers.put("shift", getShift());
+        workers.put("uid", getUID());
         return workers;
     }
 }

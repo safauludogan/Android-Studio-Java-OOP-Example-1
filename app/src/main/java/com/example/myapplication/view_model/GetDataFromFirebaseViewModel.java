@@ -43,11 +43,11 @@ public class GetDataFromFirebaseViewModel extends ViewModel {
         DatabaseReference databaseReference = rootNode.getReference("workers").child("academician");
 
         List<Academician> academiciansArrayList = new ArrayList<>();
-        academiciansArrayList.clear();
-        academicianLiveData.setValue(academiciansArrayList);
         ValueEventListener academiciansListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                academiciansArrayList.clear();
+                academicianLiveData.setValue(academiciansArrayList);
                 for (DataSnapshot childSnapshot : snapshot.getChildren()) {
                     if (childSnapshot != null) {
                         Academician academician = childSnapshot.getValue(Academician.class);

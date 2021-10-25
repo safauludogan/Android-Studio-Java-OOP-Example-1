@@ -1,12 +1,15 @@
-package com.example.myapplication.database;
+package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.database.Academician;
 import com.example.myapplication.databinding.ActivityAcademicianDetailBinding;
 
 import java.util.List;
@@ -21,13 +24,10 @@ public class AcademicianDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityAcademicianDetailBinding = DataBindingUtil.setContentView(this, R.layout.activity_academician_detail);
 
+        //GetSerializable Model
         Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        academician = (Academician) bundle.getSerializable("academicianModel");
-
-        System.out.println(academician.getName());
-        System.out.println(academician.getMission());
-
+        academician = (Academician) intent.getSerializableExtra("academician");
+        Toast.makeText(getApplicationContext(), academician.getUID(), Toast.LENGTH_SHORT).show();
         activityAcademicianDetailBinding.setAcademician(academician);
     }
 }

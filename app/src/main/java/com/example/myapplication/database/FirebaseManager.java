@@ -24,17 +24,14 @@ public class FirebaseManager implements IDatabase {
     DatabaseReference myRef;
 
     public FirebaseManager(Context context, HashMap<Object, Object> workers) {
-        this();
         this.workers = workers;
         this.context = context;
     }
 
-    public FirebaseManager() {
-        myRef = database.getReference("workers").child(unit).child(UUID.randomUUID().toString());
-    }
-
     @Override
     public void addData() {
+        myRef = database.getReference("workers").child(unit).child(String.valueOf(workers.get("uid")));
+
         myRef.setValue(workers)
                 .addOnCompleteListener(task -> Toast.makeText(context, "Data adding successfully.", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(context, "Data adding fails.", Toast.LENGTH_SHORT).show());

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".database.AcademicianDetailActivity"
+            android:name=".AcademicianDetailActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
