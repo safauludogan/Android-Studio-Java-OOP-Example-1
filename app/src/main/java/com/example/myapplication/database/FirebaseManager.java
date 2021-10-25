@@ -13,7 +13,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class FirebaseManager implements IDatabase {
 
@@ -26,6 +25,10 @@ public class FirebaseManager implements IDatabase {
     public FirebaseManager(Context context, HashMap<Object, Object> workers) {
         this.workers = workers;
         this.context = context;
+    }
+
+    public FirebaseManager() {
+
     }
 
     @Override
